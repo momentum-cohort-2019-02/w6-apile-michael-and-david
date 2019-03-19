@@ -4,7 +4,6 @@ from django.urls import reverse
 
 # Create your models here.
 
-<<<<<<< HEAD
 class Comment(models.Model):
 
     text = models.Charfield(max_length=500), null=True)
@@ -20,7 +19,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.author
-=======
 class Tag(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(null=True, blank=True)
@@ -35,4 +33,3 @@ class Tag(models.Model):
     def get_absolute_url(self):
         return reverse("tag_list", kwargs={"slug": self.slug})
     
->>>>>>> master
