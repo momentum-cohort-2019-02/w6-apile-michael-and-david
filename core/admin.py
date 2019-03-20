@@ -12,5 +12,5 @@ class CommentAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(Post)
-class PostAdmi(admin.ModelAdmin):
-    pass
+class PostAdmin(admin.ModelAdmin):
+    exclude = ("liked_by",)

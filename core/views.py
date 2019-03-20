@@ -5,9 +5,9 @@ from .models import Post
 
 def index(request):
     posts = Post.objects.all()
-    return render(request, 'core/<your template name>', context={'posts': posts})
+    return render(request, 'core/index.html', context={'posts': posts})
 
 def post_detail(request, slug):
     post = Post.objects.filter(slug=slug)
-    return render(request, 'core/<your template name>', context={'post': post})
+    return render(request, 'core/base.html', context={'post': post})
     

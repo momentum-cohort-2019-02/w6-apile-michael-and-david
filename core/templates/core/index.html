@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>SideChain</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css">
+{% block meta %}{% endblock %}
+</head>
+{% load static %} 
+
+<body>
+    {% block content %}
+<header class="bg-blue fixed w-100 ph3 pv3 pv4-ns ph4-m ph5-l helvetica">
+ 
+  <nav class="f6 fw6 ttu tracked helvetica">
+    <a class="link dim white dib mr3" href="#" title="Home">SIDECHAIN</a>
+    <a class="link dim white dib mr3" href="#" title="About">Tags</a>
+    <a class="link dim white dib" href="#" title="Contact">login</a>
+  </nav>
+</header>
+
+
+
+
+  {% for post in posts %}
+<div class="flex flex-column">
+  <div class="outline mt-30 pa3 mr2 ma-20 mt7 ml5 mr5">
+    <code class="helvetica">{{ post.title }}</code>
+  
+
+
+    
+  
+  </div>
+  </div>
+
+  {% endfor %}
+
+
+
+</body>
+{% endblock %}
+</html>
