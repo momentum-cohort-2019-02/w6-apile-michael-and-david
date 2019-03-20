@@ -60,5 +60,5 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('profile_page', kwargs={"slug": self.slug})
+        return reverse('post_detail', kwargs={"slug": self.slug})
     
