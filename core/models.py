@@ -13,7 +13,7 @@ class Comment(models.Model):
 
     date_added = models.DateTimeField(null=True, blank=True, auto_now_add=True)
 
-    liked_by = models.ManyToManyField(to=User, related_name="liked_comments")
+    liked_by = models.ManyToManyField(to=User, related_name="liked_comments", blank=True)
 
     replying_to = models.ForeignKey(to=User, related_name="comment_reply", default="Anonymous", on_delete=models.SET_DEFAULT)
 
@@ -41,8 +41,8 @@ class Post(models.Model):
         default="Anonymous", 
         on_delete=models.SET_DEFAULT, 
         related_name='authored_posts')
-    liked_by = models.ManyToManyField(to=User, related_name='liked_posts')
-    tags = models.ManyToManyField(to=Tag, related_name='posts')
+    liked_by = models.ManyToManyField(to=User, related_name='liked_posts', blank=True)
+    tags = models.ManyToManyField(to=Tag, related_name='posts', blank=True)
 
     # Content info
     title = models.CharField(max_length=255)
@@ -56,7 +56,7 @@ class Post(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(self.title)[:45]
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
