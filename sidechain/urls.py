@@ -16,10 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic.base import RedirectView
+from django.conf import settings
+from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('posts/', include('core.urls')),
     path('', RedirectView.as_view(url='/posts/', permanent=True)),
     re_path(r'^accounts/', include('registration.backends.default.urls')),
+    path('users/<str:username>/', views.profile, name='profile_page'),
+    path('tags/', views.tags, name='tags'),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ]
