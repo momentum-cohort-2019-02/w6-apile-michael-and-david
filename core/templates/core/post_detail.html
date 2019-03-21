@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+
+
+
+<div class="flex flex-column">
+   
+    
+        {% for post in posts %}
+        <div class="outline pa1 mr2 ma-7 mt5 ml7 mr7 gold">
+          
+          <a class="helvetica link:link link dim white-90 dib mr3" href="{{ post.url }}"><h3>{{ post.title }}</h3></a>
+          <code class="helvetica"><h4>Posted By:{{ post.author }}</h4></code>
+          <code class="helvetica white f4  ">{{ post.description}}</code>
+          <code class="helvetica"><h4>{{ post.date_added }}</h4></code>
+          <code class="helvetica"><h4>Reply</h4></code>

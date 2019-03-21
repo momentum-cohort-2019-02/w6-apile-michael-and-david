@@ -9,35 +9,49 @@
 </head>
 {% load static %} 
 
-<body>
+<body class="bg-dark-blue">
     {% block content %}
-<header class="bg-blue fixed w-100 ph3 pv3 pv4-ns ph4-m ph5-l helvetica">
+<header class="bg-blue black-90 w-100 ph2 pv2 pv3-ns ph3-m ph4-l mb2 helvetica ">
  
-  <nav class="f6 fw6 ttu tracked helvetica">
-    <a class="link dim white dib mr3" href="#" title="Home">SIDECHAIN</a>
+  <nav class="f4 fw6 ttu tracked">
+    <a class="link dim white dib mr3" href="{% url 'index' %}" title="Home">SIDECHAIN</a>
     <a class="link dim white dib mr3" href="#" title="About">Tags</a>
-    <a class="link dim white dib" href="#" title="Contact">login</a>
+    <a class="link dim white dib" href="{% url 'auth_login' %}" title="Contact">login</a>
+    
   </nav>
 </header>
 
 
 
 
-  {% for post in posts %}
+ 
 <div class="flex flex-column">
-  <div class="outline mt-30 pa3 mr2 ma-20 mt7 ml5 mr5">
-    <code class="helvetica">{{ post.title }}</code>
+   
+   
+    
+  {% for post in posts %}
+  <div class=" bw2 bg-blue bl bb br br4 bt   mr2  ml7 mr7 white w-70  h-50 ">
+    
+    <a class="helvetica link:link link dim black-90 dib mr3 f3 fw9" href="{{ post.url }}"><p>{{ post.title }}</p></a>
+    <code class="helvetica lh-copy"><p>Posted By:{{ post.author }}</p></code>
+    <code class="helvetica f5 lh-solid b--dark-gray ">{{ post.description}}</code>
+    <code class="helvetica"><h4>{{ post.date_added }}</h4></code>
+    <a class="helvetica link:link link dim dib mr3 lh-copy" href=""><h4>Reply</h4></a>
+    
   
+    
 
 
     
   
   </div>
   </div>
-
+  <br>
+  <br>
+  <br>
   {% endfor %}
 
-
+</div>
 
 </body>
 {% endblock %}
