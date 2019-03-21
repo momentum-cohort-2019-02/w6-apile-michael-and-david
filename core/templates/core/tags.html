@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +9,10 @@
     <title>Document</title>
 </head>
 <body>
-    {% for tag in tags %}
-    {{ tag }}
-    {% endfor %}
+    {% block content %}
+        {% for tag in tags %}
+        {{ tag }}
+        {% endfor %}
+    {% endblock %}
 </body>
 </html>
