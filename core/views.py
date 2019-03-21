@@ -10,7 +10,9 @@ def index(request):
 
 def post_detail(request, slug):
     post = Post.objects.filter(slug=slug)
-    return render(request, 'core/base.html', context={'post': post})
+    return render(request, 'core/post_detail.html', context={'post': post})
+    
+    
 
 def profile(request, username):
     user = User.objects.get(username=username)
