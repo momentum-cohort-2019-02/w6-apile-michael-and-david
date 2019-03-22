@@ -19,3 +19,7 @@ def profile(request, username):
 def tags(request):
     tags = Tag.objects.all()
     return render(request, 'core/tags.html', context={'tags': tags})
+
+def tagged_list(request, slug):
+    posts = Post.objects.filter(tags__slug=slug)
+    return render(request, 'core/tagged_list.html', context={'posts': posts})

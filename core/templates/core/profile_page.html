@@ -11,7 +11,19 @@
 <body>
     {% block content %}
         {% for post in user.authored_posts.all %}
-        <p>{{ post.title }}</p>
+        <div class="flex flex-column">  
+            <div class=" bw5 b--moon-gray shadow-5 bg-white  bl br3   mr2  ml7 mr7 gray w-70  h-50 shadow-5  ">  
+            <a class="helvetica link:link link dim black-90 dib mr3 f3 fw9 bb bw3 b--blue shadow-5" href="{{ post.url }}"><p>{{ post.title }}</p></a>
+            <code class="helvetica lh-copy dark-red"><p>Posted By: {{ post.author }}</p></code>
+            <code class="helvetica f5 lh-solid b--dark-gray  ">{{ post.description}}</code>
+            <code class="helvetica dark-red"><h4>{{ post.date_added }}</h4></code>
+            <a class="helvetica link:link link dim dib mr3 lh-copy" href="{{ post.get_absolute_url }}
+            "><h4>Reply</h4></a>
+            </div>
+            <br>
+            <br>
+            <br>  
+        </div>
         {% endfor %}
     {% endblock %}
 </body>
