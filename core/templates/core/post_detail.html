@@ -9,6 +9,19 @@
       <code class="helvetica dark-red"><h4>{{ post.date_added }}</h4></code>
       <a class="helvetica link:link link dim dib mr3 lh-copy" href="{{ post.get_absolute_url }}
       "><h4>Reply</h4></a>  
+    
+    
+      <a href="{% url 'add_comment' slug=post.slug %}" > leave a comment </a>   
+    {% for comment in comments %}
+        
+        
+        <p> {{ comment.author}}</p>
+        <p> {{ comment.text }}</p>
+        {% empty %}
+        
+        {% endfor %}
+
+
     </div>
   </div>
   <br>
