@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Tag, Comment
 from django.contrib.auth.models import User
 from .forms import CommentForm, PostForm
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -49,7 +50,7 @@ def add_comment(request, slug):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.post = post 
+            comment.commenting_on = post 
             comment.save()
             return redirect('post_detail', slug=post.slug)
         
@@ -61,5 +62,13 @@ def add_comment(request, slug):
 
     return render(request, template, context)
     
-
+@login_required
+def favorite_post(request, slug):
+    post = Post.objects.get(slug=slug)
+    if request.user not in post.liked_by.all():
+        post.liked_by.add(request.user)
+    else:
+        post.liked_by.remove(request.user)
+    next_page = request.POST.get('next', '/')
+    return redirect(next_page)
    
