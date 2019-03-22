@@ -35,6 +35,10 @@ class Tag(models.Model):
         return reverse("tag_list", kwargs={"slug": self.slug})
 
 class Post(models.Model):
+
+    class Meta:
+        ordering = ['-date_added']
+        
     # Relational attributes
     author = models.ForeignKey(
         to=User, 
@@ -50,6 +54,9 @@ class Post(models.Model):
     description = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(null=True, blank=True)
+
+    #Media fields
+    audio = models.FileField(upload_to='audio_clips', blank=True)
 
     # Utility methods
     def __str__(self):

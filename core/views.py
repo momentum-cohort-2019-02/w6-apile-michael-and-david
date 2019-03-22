@@ -1,12 +1,30 @@
-from django.shortcuts import render
-from .models import Post, Tag
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib import messages
+from .models import Post, Tag
+from .forms import PostForm
+
 
 # Create your views here.
 
 def index(request):
     posts = Post.objects.all()
-    return render(request, 'core/index.html', context={'posts': posts})
+
+    if request.method == "POST" and request.user.is_authenticated:
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            messages.success(
+                request,
+                f"Thank you for your input!"
+            )
+            return redirect(to='index')
+
+    form = PostForm()
+
+    return render(request, 'core/index.html', context={'posts': posts, 'form':form})
 
 def post_detail(request, slug):
     post = Post.objects.get(slug=slug)
