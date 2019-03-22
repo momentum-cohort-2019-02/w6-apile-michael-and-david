@@ -133,6 +133,9 @@ INTERNAL_IPS = '127.0.0.1'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
 ACCOUNT_ACTIVATION_DAYS = 5
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
