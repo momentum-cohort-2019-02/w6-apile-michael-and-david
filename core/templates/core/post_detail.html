@@ -10,15 +10,15 @@
       <a class="helvetica link:link link dim dib mr3 lh-copy" href="{{ post.get_absolute_url }}
       "><h4>Reply</h4></a>  
     
-    <p> number of comments {{comment.comment.count}}</p>
-    <a href="{% url 'add_comment' slug=post.slug %}" > leave a comment </a>   
-    {% for comment in comment.all %}
-        <p>{{ comment.dated_added }}</p>
-        <p> {{ comment.replying_to }}</p>
+    
+      <a href="{% url 'add_comment' slug=post.slug %}" > leave a comment </a>   
+    {% for comment in comments %}
+        
+        
         <p> {{ comment.author}}</p>
         <p> {{ comment.text }}</p>
         {% empty %}
-        <p> There are no comments </p>
+        
         {% endfor %}
 
 

@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class Comment(models.Model):
 
-    text = models.CharField(max_length=500, null=True)
+    text = models.TextField(max_length=500, null=True)
 
     author = models.ForeignKey(to=User, related_name="comments", default="Anonymous", on_delete=models.SET_DEFAULT)
 
@@ -17,8 +17,9 @@ class Comment(models.Model):
 
     replying_to = models.ForeignKey(to=User, related_name="comment_reply", default="Anonymous", on_delete=models.SET_DEFAULT)
 
+    commenting_on = models.ForeignKey(to='Post', related_name="comments", on_delete=models.CASCADE)
     def __str__(self):
-        return self.author
+        return self.author.username
 
 class Tag(models.Model):
     name = models.CharField(max_length=255)

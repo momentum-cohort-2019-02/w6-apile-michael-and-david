@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Tag
+from .models import Post, Tag, Comment
 from django.contrib.auth.models import User
 from .forms import CommentForm, PostForm
 
@@ -27,7 +27,8 @@ def index(request):
 
 def post_detail(request, slug):
     post = Post.objects.get(slug=slug)
-    return render(request, 'core/post_detail.html', context={'post': post})
+    comments = post.comments.all()
+    return render(request, 'core/post_detail.html', context={'post': post, 'comments':comments})
 
 def profile(request, username):
     user = User.objects.get(username=username)
@@ -53,9 +54,12 @@ def add_comment(request, slug):
             return redirect('post_detail', slug=post.slug)
         
        
-        else:
-            form = CommentForm()
-        template = 'add_comment.html'
-        context = {'forms': form}
-        return render(request, template, context)
-        
+   
+    form = CommentForm()
+    template = 'core/add_comment.html'
+    context = {'form': form, 'post': post }
+
+    return render(request, template, context)
+    
+
+   
