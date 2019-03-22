@@ -4,14 +4,13 @@ from django.contrib import messages
 from .models import Post, Tag
 from .forms import PostForm
 
-
 # Create your views here.
 
 def index(request):
     posts = Post.objects.all()
 
     if request.method == "POST" and request.user.is_authenticated:
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
