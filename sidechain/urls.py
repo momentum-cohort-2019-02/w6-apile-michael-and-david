@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic.base import RedirectView
 from django.conf import settings
-from core import views
+from core import views 
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +27,7 @@ urlpatterns = [
     re_path(r'^accounts/', include('registration.backends.default.urls')),
     path('users/<str:username>/', views.profile, name='profile_page'),
     path('tags/', views.tags, name='tags'),
+    re_path(r'^(?P<slug>[-\w]+)/comment/$', views.add_comment, name='add_comment')
 ]
 
 if settings.DEBUG:
