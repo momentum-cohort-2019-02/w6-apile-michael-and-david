@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic.base import RedirectView
 from django.conf import settings
+from django.conf.urls.static import static
 from core import views
 
 urlpatterns = [
@@ -26,7 +27,7 @@ urlpatterns = [
     re_path(r'^accounts/', include('registration.backends.default.urls')),
     path('users/<str:username>/', views.profile, name='profile_page'),
     path('tags/', views.tags, name='tags'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
