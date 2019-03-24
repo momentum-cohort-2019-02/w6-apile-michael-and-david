@@ -6,16 +6,16 @@
       <div class="flex justify-between">
         <a class="helvetica link:link link dim black-90 dib mr3 f3 fw9 bb bw3 b--blue shadow-5" href="{{ post.url }}"><p>{{ post.title }}</p></a>
         {% if request.user.is_authenticated %}
-          <form action="{% url 'favorite_post' slug=post.slug %}" method="POST">
+          <form action="{% url 'like_post' slug=post.slug %}" method="POST">
               {% csrf_token %}
               <input type="hidden" name="next" value="{{ request.path }}">
-              <button type="submit" class="mt3 mr3">
-                  {% if request.user in post.liked_by.all %}
-                  Unfavorite
-                  {% else %}
-                  Favorite
-                  {% endif %}
-              </button>  
+              {% if request.user not in post.liked_by.all %}
+                <button type="submit" class="mt3 mr3">
+                  ⬆
+                </button>
+              {% else %}
+                <p class="mt3 mr3">✅</p>
+              {% endif %}  
           </form>
         {% endif %}
       </div>

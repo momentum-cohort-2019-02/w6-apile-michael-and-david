@@ -15,7 +15,12 @@
         <nav class="f4 fw6 ttu tracked">
             <a class="link dim white dib mr3" href="{% url 'index' %}" title="Home">SIDECHAIN</a>
             <a class="link dim white dib mr3" href="{% url 'tags' %}" title="About">Tags</a>
-            <a class="link dim white dib" href="{% url 'auth_login' %}" title="Contact">login</a>
+            {% if request.user.is_authenticated %}
+                <a class="link dim white dib" href="{% url 'profile_page' username=request.user.username %}" title="Contact">{{ request.user.username }}</a>
+                <a class="link dim white dib" href="{% url 'auth_logout' %}" title="Contact">| logout</a>
+            {% else %}
+                <a class="link dim white dib" href="{% url 'auth_login' %}" title="Contact">login</a>
+            {% endif %}
         </nav>
     </header>
     {% block content %}{% endblock %}

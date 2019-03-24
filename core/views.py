@@ -3,6 +3,7 @@ from .models import Post, Tag, Comment
 from django.contrib.auth.models import User
 from .forms import CommentForm, PostForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -63,7 +64,7 @@ def add_comment(request, slug):
     return render(request, template, context)
     
 @login_required
-def favorite_post(request, slug):
+def like_post(request, slug):
     post = Post.objects.get(slug=slug)
     if request.user not in post.liked_by.all():
         post.liked_by.add(request.user)
