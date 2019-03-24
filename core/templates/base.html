@@ -17,6 +17,15 @@
             <a class="link dim white dib mr3" href="{% url 'tags' %}" title="About">Tags</a>
             <a class="link dim white dib" href="{% url 'auth_login' %}" title="Contact">login</a>
         </nav>
+        <div class="justify-center ">
+        <form id="searchform" action="{% url 'post_search_list_view' %}" method="get" accept-charset="utf-8">
+                <button class="searchbutton" type="submit">
+                  <i class="fa fa-search"></i>
+                </button>
+                <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+              </form>
+            </div>
+    
     </header>
     {% block content %}{% endblock %}
 </body>

@@ -2,9 +2,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Tag, Comment
 from django.contrib.auth.models import User
 from .forms import CommentForm, PostForm
+from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+from django.views.generic import ListView
 
 
-# Create your views here.
+
 
 def index(request):
     posts = Post.objects.all()
@@ -62,4 +64,4 @@ def add_comment(request, slug):
     return render(request, template, context)
     
 
-   
+                
