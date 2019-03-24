@@ -5,7 +5,11 @@
  
 {% block content %}
   <h1 class="ml7 white helvetica">HOME</h1>
-  <div class="flex flex-column">  
+  <div class="flex flex-column">
+    <form method="GET" action="{% url 'index' %}">
+      {{ sortform.as_p }}
+      <button type="submit">Sort</button>
+    </form>  
     {% for post in posts %}
     <div class=" bw5 b--moon-gray shadow-5 bg-white  bl br3   mr2  ml7 mr7 gray w-70  h-50 shadow-5  ">  
       <div class="flex justify-between">

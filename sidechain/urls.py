@@ -29,8 +29,8 @@ urlpatterns = [
     re_path(r'^accounts/', include('registration.backends.default.urls')),
     path('users/<str:username>/', views.profile, name='profile_page'),
     path('tags/', views.tags, name='tags'),
-    re_path(r'^(?P<slug>[-\w]+)/comment/$', views.add_comment, name='add_comment'),
-    re_path(r'^search/$', views.search, name='search')
+    re_path(r'^(?P<slug>[-\w]+)/comment/$', views.add_comment, name='add_comment')
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
