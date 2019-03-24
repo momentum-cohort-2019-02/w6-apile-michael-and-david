@@ -71,4 +71,11 @@ def favorite_post(request, slug):
         post.liked_by.remove(request.user)
     next_page = request.POST.get('next', '/')
     return redirect(next_page)
+
+@login_required
+def delete_post(request, slug):
+    post = Post.objects.get(slug=slug)
+    post.delete()
+    next_page = request.POST.get('next', '/')
+    return redirect(next_page)
    
