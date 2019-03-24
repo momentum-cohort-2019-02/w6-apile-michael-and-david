@@ -5,6 +5,8 @@ from .forms import CommentForm, PostForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
+from .filters import PostFilter
+
 
 
 
@@ -94,3 +96,7 @@ def delete_post(request, slug):
     next_page = request.POST.get('next', '/')
     return redirect(next_page)
    
+def search(request):
+    post_list = Post.objects.all()
+    post_filter = PostFilter(request.GET, queryset=post_list)
+    return render(request, 'search/post_list.html', {'filter': post_filter})

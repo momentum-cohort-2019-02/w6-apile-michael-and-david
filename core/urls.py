@@ -7,3 +7,4 @@ urlpatterns = [
     path('tagged/<slug:slug>/', views.tagged_list, name='tagged_list'),
     path('<slug:slug>/like/', views.like_post, name='like_post'),
     path('<slug:slug>/delete/', views.delete_post, name='delete_post')
+]

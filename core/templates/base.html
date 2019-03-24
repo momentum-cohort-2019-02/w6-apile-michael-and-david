@@ -22,14 +22,17 @@
                 <a class="link dim white dib" href="{% url 'auth_login' %}" title="Contact">login</a>
             {% endif %}
         </nav>
-        <div class="justify-center ">
-        <form id="searchform" action="{% url 'post_search_list_view' %}" method="get" accept-charset="utf-8">
-                <button class="searchbutton" type="submit">
-                  <i class="fa fa-search"></i>
-                </button>
-                <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
-              </form>
-            </div>
+        {% block content %}
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+  {% for post in filter.qs %}
+    <li>{{ post.author }} - {{ post.liked_by }} - {{ post.tags }}</li>
+  {% endfor %}
+  </ul>
+{% endblock %}
     
     </header>
     {% block content %}{% endblock %}
