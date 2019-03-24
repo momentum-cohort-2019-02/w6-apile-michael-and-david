@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .forms import CommentForm, PostForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -24,6 +25,9 @@ def index(request):
             return redirect(to='index')
 
     form = PostForm()
+    paginator = Paginator(posts, 20)
+    page = request.GET.get('page', 1)
+    posts = paginator.get_page(page)
 
     return render(request, 'core/index.html', context={'posts': posts, 'form':form})
 
@@ -34,7 +38,13 @@ def post_detail(request, slug):
 
 def profile(request, username):
     user = User.objects.get(username=username)
-    return render(request, 'core/profile_page.html', context={'user': user})
+    posts = user.authored_posts.all()
+
+    paginator = Paginator(posts, 20)
+    page = request.GET.get('page', 1)
+    posts = paginator.get_page(page)
+
+    return render(request, 'core/profile_page.html', context={'user': user, 'posts': posts})
 
 def tags(request):
     tags = Tag.objects.all()
@@ -42,7 +52,12 @@ def tags(request):
 
 def tagged_list(request, slug):
     posts = Post.objects.filter(tags__slug=slug)
-    return render(request, 'core/tagged_list.html', context={'posts': posts})
+
+    paginator = Paginator(posts, 20)
+    page = request.GET.get('page', 1)
+    posts = paginator.get_page(page)
+
+    return render(request, 'core/tagged_list.html', context={'posts': posts, 'tag': slug})
 
 
 def add_comment(request, slug):
