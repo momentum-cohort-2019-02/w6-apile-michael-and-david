@@ -4,6 +4,7 @@
 <html lang="en">
  
 {% block content %}
+  <h1 class="ml7 white helvetica">HOME</h1>
   <div class="flex flex-column">  
     {% for post in posts %}
     <div class=" bw5 b--moon-gray shadow-5 bg-white  bl br3   mr2  ml7 mr7 gray w-70  h-50 shadow-5  ">  
@@ -36,6 +37,9 @@
       {% endif %}
       <code class="helvetica f5 lh-solid b--dark-gray  ">{{ post.description}}</code>
       <code class="helvetica dark-red"><h4>{{ post.date_added }}</h4></code>
+      <p class="helvetica dark-red">Likes: {{ post.liked_by.count }}</p>
+      <p><a class="helvetica dark-red hover-purple no-underline" href="{{ post.get_absolute_url }}">
+        Comments: {{ post.comments.count }}</a></p>
       <a class="helvetica link:link link dim dib mr3 lh-copy" href="{{ post.get_absolute_url }}
       "><h4>Reply</h4></a>
     </div>
@@ -55,6 +59,23 @@
         </div>
       </div>
     {% endif %}
+    <div class="flex justify-around mb3 mt3">
+      <div>
+            {% if posts.has_previous %}
+                <a href="?page=1" class="white hover-red">&laquo; first</a>
+                <a href="?page={{ posts.previous_page_number }}" class="white hover-red"> previous </a>
+            {% endif %}
+    
+            <span class="white">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+            </span>
+    
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}" class="white hover-red"> next</a>
+                <a href="?page={{ posts.paginator.num_pages }}" class="white hover-red"> last &raquo;</a>
+            {% endif %}
+        </div>
+      </div>
   </div>
 {% endblock %}
 
