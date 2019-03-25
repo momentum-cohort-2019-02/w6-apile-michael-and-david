@@ -19,27 +19,23 @@
           </form>
         {% endif %}
       </div>
-      <code class="helvetica lh-copy dark-red"><p>Posted By:{{ post.author }}</p></code>
+      <code class="helvetica lh-copy dark-red"><p>Posted By: <a href="{% url 'profile_page' username=post.author.username %}">{{ post.author }}</a></p></code>
       <code class="helvetica f5 lh-solid b--dark-gray  ">{{ post.description}}</code>
       <code class="helvetica dark-red"><h4>{{ post.date_added }}</h4></code>
       <p class="helvetica dark-red">Likes: {{ post.liked_by.count }}</p>
       <p><a class="helvetica dark-red hover-purple no-underline" href="{{ post.get_absolute_url }}">
-        Comments: {{ post.comments.count }}</a></p>
-      <a class="helvetica link:link link dim dib mr3 lh-copy" href="{{ post.get_absolute_url }}
-      "><h4>Reply</h4></a>  
-    
-    
-      <a href="{% url 'add_comment' slug=post.slug %}" > leave a comment </a>   
+        Comments: {{ post.comments.count }}</a></p> 
+      {% if request.user.is_authenticated %}
+      <a href="{% url 'add_comment' slug=post.slug %}" > leave a comment </a>  
+      {% endif %} 
     {% for comment in comments %}
         
-        
-        <p> {{ comment.author}}</p>
+      <div class="helvetica ba b--dark-red br4 mb2 pl2 pr2 ml5 mw7">  
+        <p class="pl4"> {{ comment.author}}</p>
         <p> {{ comment.text }}</p>
-        {% empty %}
-        
-        {% endfor %}
+      </div>
 
-
+    {% endfor %}
     </div>
   </div>
   <br>
