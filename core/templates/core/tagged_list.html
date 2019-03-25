@@ -29,8 +29,10 @@
         <p class="helvetica dark-red">Likes: {{ post.liked_by.count }}</p>
         <p><a class="helvetica dark-red hover-purple no-underline" href="{{ post.get_absolute_url }}">
             Comments: {{ post.comments.count }}</a></p>
+        {% if request.user.is_authenticated %}
         <a class="helvetica link:link link dim dib mr3 lh-copy" href="{{ post.get_absolute_url }}
         "><h4>Reply</h4></a>
+        {% endif %}
     </div>
     <br>
     <br>

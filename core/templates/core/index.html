@@ -6,9 +6,9 @@
 {% block content %}
   <h1 class="ml7 white helvetica">HOME</h1>
   <div class="flex flex-column">
-    <form method="GET" action="{% url 'index' %}">
+    <form method="GET" action="{% url 'index' %}" class="flex ml7 white helvetica items-center">
       {{ sortform.as_p }}
-      <button type="submit">Sort</button>
+      <button type="submit" class="ml3 h2">Sort</button>
     </form>  
     {% for post in posts %}
     <div class=" bw5 b--moon-gray shadow-5 bg-white  bl br3   mr2  ml7 mr7 gray w-70  h-50 shadow-5  ">  
@@ -44,8 +44,10 @@
       <p class="helvetica dark-red">Likes: {{ post.liked_by.count }}</p>
       <p><a class="helvetica dark-red hover-purple no-underline" href="{{ post.get_absolute_url }}">
         Comments: {{ post.comments.count }}</a></p>
+      {% if request.user.is_authenticated %}
       <a class="helvetica link:link link dim dib mr3 lh-copy" href="{{ post.get_absolute_url }}
       "><h4>Reply</h4></a>
+      {% endif %}
     </div>
     <br>
     <br>
