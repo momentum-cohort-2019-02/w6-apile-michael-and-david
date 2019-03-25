@@ -31,6 +31,13 @@
                 {% endif %}
             </div>
             <code class="helvetica lh-copy dark-red"><p>Posted By: {{ post.author }}</p></code>
+            {% if post.audio %}
+                <audio controls="">
+                    <source src="{{ post.audio.url }}" type="audio/wav">
+                    <source src="{{ post.audio.url }}" type="audio/mpeg">
+                </audio>
+                <br>
+            {% endif %}
             <code class="helvetica f5 lh-solid b--dark-gray  ">{{ post.description}}</code>
             <code class="helvetica dark-red"><h4>{{ post.date_added }}</h4></code>
             <p class="helvetica dark-red">Likes: {{ post.liked_by.count }}</p>

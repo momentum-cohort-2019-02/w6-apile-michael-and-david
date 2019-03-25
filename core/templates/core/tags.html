@@ -11,7 +11,7 @@
 <body>
     {% block content %}
     <h1 class="ml7 white helvetica">TAGS</h1>
-        <div class="flex bw5 b--moon-gray shadow-5 bg-white  bl br3   mr2  ml7 mr7 gray w-70  h-50 shadow-5 ">
+        <div class="flex flex-wrap bw5 b--moon-gray shadow-5 bg-white  bl br3   mr2  ml7 mr7 gray w-70  h-50 shadow-5 ">
             {% for tag in tags %}
             <span class="helvetica black-90 ma1 f4 fw7 bb bw3 b--blue shadow-5 dim">
                 <a href="{% url 'tagged_list' slug=tag.slug %}" class="no-underline black">#{{ tag }}</a>
