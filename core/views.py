@@ -1,13 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Tag, Comment
 from django.contrib.auth.models import User
-from .forms import CommentForm, PostForm
+from .forms import CommentForm, PostForm, SortForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
 
 
-# Create your views here.
+
+
 
 def index(request):
     posts = Post.objects.all()
@@ -24,12 +25,18 @@ def index(request):
             )
             return redirect(to='index')
 
+    if request.method == "GET":
+        sortform = SortForm(request.GET)
+        posts = sortform.sort(posts)
+    else:
+        sortform = SortForm()
+
     form = PostForm()
     paginator = Paginator(posts, 20)
     page = request.GET.get('page', 1)
     posts = paginator.get_page(page)
 
-    return render(request, 'core/index.html', context={'posts': posts, 'form':form})
+    return render(request, 'core/index.html', context={'posts': posts, 'form': form, 'sortform': sortform})
 
 def post_detail(request, slug):
     post = Post.objects.get(slug=slug)

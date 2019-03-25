@@ -18,7 +18,7 @@ from django.urls import path, include, re_path
 from django.views.generic.base import RedirectView
 from django.conf import settings
 from core import views 
-
+from django.conf.urls import url
 from django.conf.urls.static import static
 
 
@@ -30,6 +30,8 @@ urlpatterns = [
     path('users/<str:username>/', views.profile, name='profile_page'),
     path('tags/', views.tags, name='tags'),
     re_path(r'^(?P<slug>[-\w]+)/comment/$', views.add_comment, name='add_comment')
+
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
